@@ -1,0 +1,26 @@
+<package>
+  <name>sceneNN_RGBD_publisher</name>
+  <version>0.0.0</version>
+  <description>Project for publish static color images and depth images to ROS topics. Mainly use on sceneNN dataset plz download the dataset here. https://github.com/hkust-vgd/scenenn</description>
+  <author>Alan Tian</author>
+  <maintainer email="asd293764@gmail.com">Alan Tian</maintainer>
+  <license>Apache 2.0</license>
+
+  <build_depend>cv_bridge</build_depend>
+  <build_depend>image_transport</build_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>opencv2</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+
+  <run_depend>cv_bridge</run_depend>
+  <run_depend>image_transport</run_depend>
+  <run_depend>message_runtime</run_depend>
+  <run_depend>opencv2</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <export>
+    <image_transport plugin="${prefix}/resized_plugins.xml"/>
+  </export>
+</package>
