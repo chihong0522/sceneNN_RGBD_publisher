@@ -10,7 +10,7 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-    string TEST_COLOR_IMG_TOPIC = "/test/camera/color/image_raw";
+    string TEST_COLOR_IMG_TOPIC = "/camera/color/image_raw";
 
     ros::init(argc, argv, "test_img_publisher");
     if(argc!=2) {
@@ -27,19 +27,22 @@ int main(int argc, char** argv)
 
     ros::NodeHandle nh;
     image_transport::ImageTransport it(nh);
-    image_transport::Publisher pub = it.advertise(TEST_COLOR_IMG_TOPIC, 1);
+    image_transport::Publisher pub = it.advertise(TEST_COLOR_IMG_TOPIC, 1000);
     ros::Rate loop_rate(15);
 
     for (vec::const_iterator it(colorImagePaths.begin()), it_end(colorImagePaths.end()); it != it_end; ++it)
     {
         string readPath = it->string();
         cv::Mat image = cv::imread(readPath, cv::IMREAD_COLOR);
-        sensor_msgs::ImagePtr msg = cv_bridge::CvImage(std_msgs::Header(), "bgr8", image).toImageMsg();
+        std_msgs::Header fakeHeader = std_msgs::Header();
+        fakeHeader.frame_id = "camera_link";
+        fakeHeader.stamp = ros::Time::now();
+        sensor_msgs::ImagePtr msg = cv_bridge::CvImage(fakeHeader, "bgr8", image).toImageMsg();
         if (nh.ok()){
             pub.publish(msg);
             cout << "Publish " << readPath << " to " << TEST_COLOR_IMG_TOPIC << endl;
         }
-        usleep(100);
+        usleep(100*1000*1.5/1.13);
     }
 
 //    while (nh.ok()) {

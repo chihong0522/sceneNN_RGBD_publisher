@@ -28,6 +28,10 @@ add_executable(sceneNN_depth_publisher src/sceneNN_depth_publisher.cpp)
 add_dependencies(sceneNN_depth_publisher ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_EXPORTED_TARGETS})
 target_link_libraries(sceneNN_depth_publisher ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 
+add_executable(sceneNN_seq_publisher src/sceneNN_seq_publisher.cpp)
+add_dependencies(sceneNN_seq_publisher ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_EXPORTED_TARGETS})
+target_link_libraries(sceneNN_seq_publisher ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+
 # add the subscriber example
 add_executable(my_subscriber src/my_subscriber.cpp)
 add_dependencies(my_subscriber ${catkin_EXPORTED_TARGETS} ${${PROJECT_NAME}_EXPORTED_TARGETS})
